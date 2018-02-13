@@ -1,34 +1,39 @@
 """
-- The Goal: Element search using Binary search 
+- The Goal: Cows And Bulls game
 - Author: Dat Nguyen
 - Create date: 2018-02-12
 """
 
 import random
 
-def binary_search(number):
-  temp_list = list_search
-  temp_number = 0
-  result = False
-  while len(temp_list) > 1:
-    temp_number = temp_list[int(len(temp_list) / 2)]
-    print(temp_number)
-    if temp_number == number:
-      result = True
-      break
-    elif temp_number > number:
-      temp_list = temp_list[0 : int(len(temp_list) / 2): 1]
-    else:
-      temp_list = temp_list[int(len(temp_list) / 2 ): len(temp_list) : 1] 
-    print(temp_list)
-    
-  return result
+def cows_and_bulls(guess = 0000):
+  temp_guess = [int(x) for x in guess]
+  cows = bulls = 0
+  for i in range(4):
+    if temp_guess[i] == secret[i]:
+      cows += 1
+  for i_g, v_g in enumerate(temp_guess):
+    for i_s, v_s in enumerate(secret):
+      if (v_g == v_s) and (i_g != i_s):
+        bulls += 1
 
-list_search = random.sample(range(40), 20)
-list_search.sort()
-print(list_search)
-number = int(input("Enter number to search: "))
-print(binary_search(number))
+  return {'cows': cows, 'bulls': bulls}
+
+secret = random.sample(range(9), 4)
+count_guess = 0
+print("Let's play!")
+while True:
+  guess = input("Guess a 4-digit number: ")
+  result = cows_and_bulls(guess)
+  print("%s cows, %s bulls" %(str(result['cows']), str(result['bulls'])))
+  count_guess += 1
+  if result['cows'] == 4:
+    print("Congratulation, %s is secret number." %(guess))
+    break
+  else:
+    print("Try again!")
+print("You spend %s times to guess exactly." %(count_guess))
+  
 
 
 
