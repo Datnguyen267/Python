@@ -1,10 +1,10 @@
 """
-- The Goal: Draw a game Board
+- The Goal: Draw a game board
 - Author: Dat Nguyen
 - Create date: 2018-02-13
 """
 
-def draw(size):
+def draw_game_board(size):
   result = ''
   for i in range((int(size) * 2) + 1):
     if i % 2 == 0:
@@ -17,4 +17,4 @@ def draw(size):
   return result
 
 size = input("What size do do want? ")
-print(draw(size))
+print(draw_game_board(size))
